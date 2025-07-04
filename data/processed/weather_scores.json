@@ -1,0 +1,29 @@
+[
+  {
+    "ville":"Berlin",
+    "mois":7,
+    "temp_moyenne":21.5,
+    "humidite_moyenne":44.0,
+    "vent_moyen":2.7,
+    "score_moyen":70.6,
+    "nb_jours":1
+  },
+  {
+    "ville":"New York",
+    "mois":7,
+    "temp_moyenne":28.8,
+    "humidite_moyenne":37.0,
+    "vent_moyen":5.1,
+    "score_moyen":54.4,
+    "nb_jours":1
+  },
+  {
+    "ville":"Paris",
+    "mois":7,
+    "temp_moyenne":26.1,
+    "humidite_moyenne":31.0,
+    "vent_moyen":3.1,
+    "score_moyen":60.5,
+    "nb_jours":1
+  }
+]

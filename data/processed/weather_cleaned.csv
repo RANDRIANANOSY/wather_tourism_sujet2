@@ -1,0 +1,4 @@
+ville,pays,date,temperature,humidite,pression,vent_vitesse,mois,annee,score_meteo
+Paris,FR,2025-07-04,26.08,31,1023,3.09,7,2025,60.492000000000004
+New York,US,2025-07-04,28.85,37,1017,5.14,7,2025,54.36
+Berlin,DE,2025-07-04,21.47,44,1022,2.68,7,2025,70.592

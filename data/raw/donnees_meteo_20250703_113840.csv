@@ -1,6 +1,0 @@
-﻿ville,date,heure,temperature_c,temperature_ressentie_c,humidite_pourcent,pression_hpa,vent_vitesse_kmh,conditions,visibilite_km,couverture_nuageuse_pourcent
-Paris,2025-07-03,11:38,20.61,20.29,60,1027,16.67,Partiellement nuageux,10.0,40
-Tokyo,2025-07-03,11:38,29.79,33.23,64,1011,25.92,Partiellement nuageux,10.0,40
-Rio de Janeiro,2025-07-03,11:38,17.8,17.8,83,1027,5.54,Couvert,10.0,100
-New York,2025-07-03,11:38,22.4,22.97,87,1010,5.54,Peu nuageux,10.0,20
-Sydney,2025-07-03,11:38,14.73,13.8,59,1012,14.83,Nuageux,10.0,75

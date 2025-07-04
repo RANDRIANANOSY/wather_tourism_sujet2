@@ -1,12 +1,1 @@
-2025-07-03 12:28:41,385 - INFO - Données chargées avec succès. 21 enregistrements.
-2025-07-03 12:28:43,416 - INFO - Rapport sauvegardé sous outputs\rapport_meteo.png
-2025-07-03 12:34:32,783 - INFO - Données chargées avec succès. 21 enregistrements.
-2025-07-03 12:34:34,418 - INFO - Rapport sauvegardé sous outputs\rapport_meteo.png
-2025-07-03 12:36:27,336 - INFO - Données chargées avec succès. 21 enregistrements.
-2025-07-03 12:36:27,344 - INFO - Données pour Paris sauvegardées dans outputs\villes\paris_data.csv
-2025-07-03 12:36:27,352 - ERROR - Erreur lors de la génération du rapport : 'seaborn' is not a valid package style, path of style file, URL of style file, or library style name (library styles are listed in `style.available`)
-2025-07-03 12:36:27,357 - INFO - Données pour la période sauvegardées dans outputs\periodes\donnees_20230601_to_20230630.csv
-2025-07-03 12:53:00,638 - INFO - Données chargées avec succès. 21 enregistrements.
-2025-07-03 12:53:00,649 - INFO - Données pour Paris sauvegardées dans outputs\villes\paris_data.csv
-2025-07-03 12:53:02,876 - INFO - Rapport d'analyse généré avec succès : outputs\rapport_meteo.png
-2025-07-03 12:53:02,891 - WARNING - Aucune donnée disponible entre 2023-06-01 et 2023-06-30
+2025-07-04 22:11:19,809 - ERROR - Aucun fichier de données trouvé dans data/processed

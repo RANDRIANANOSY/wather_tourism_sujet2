@@ -1,278 +1,221 @@
+#!/usr/bin/env python3
+"""
+Script de chargement des données météo transformées dans une base de données
+"""
+import os
+import sqlite3
 import pandas as pd
-import logging
 from typing import Optional
-from pathlib import Path
-import matplotlib.pyplot as plt
-import seaborn as sns
+import logging
 from datetime import datetime
+from transform import WeatherTransformer  # Import du transformateur
 
-class WeatherDataLoader:
-    """
-    Chargeur de données météo avec capacités d'analyse et de visualisation
-    """
+# Configuration
+DATA_DIR = "data"
+PROCESSED_DIR = os.path.join(DATA_DIR, "processed")
+DB_PATH = os.path.join(DATA_DIR, "weather_db.sqlite")
+TABLE_NAMES = {
+    'clean_data': 'weather_clean',
+    'scores': 'weather_monthly_scores'
+}
+
+# Configuration du logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+class WeatherLoader:
+    def __init__(self, db_path: str = DB_PATH):
+        self.db_path = db_path
+        self.conn = None
+        self.transformer = WeatherTransformer()  # Réutilisation du transformateur
+        
+    def connect_db(self) -> bool:
+        """Établit une connexion à la base de données"""
+        try:
+            self.conn = sqlite3.connect(self.db_path)
+            logger.info(f"Connexion à la base de données établie: {self.db_path}")
+            return True
+        except sqlite3.Error as e:
+            logger.error(f"Erreur de connexion à la base: {str(e)}")
+            return False
     
-    def __init__(self):
-        self.data = None
-        self.loaded = False
-        self.processed_dir = Path('data') / 'processed'
-        self.output_dir = Path('outputs')
-        
-        # Configuration du logging
-        self._configure_logging()
-        
-        # Création des dossiers nécessaires
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-
-    def _configure_logging(self):
-        """Configure le système de logging"""
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler('weather_loader.log'),
-                logging.StreamHandler()
-            ]
-        )
-        logging.getLogger('matplotlib').setLevel(logging.WARNING)
-
-    def _validate_data(self) -> bool:
-        """Valide la structure et le contenu des données chargées"""
-        required_columns = {
-            'ville', 'datetime', 'temperature_c', 
-            'humidite_pourcent', 'conditions'
-        }
-        
-        if not isinstance(self.data, pd.DataFrame):
-            logging.error("Les données ne sont pas un DataFrame valide")
-            return False
-            
-        if self.data.empty:
-            logging.error("Le DataFrame chargé est vide")
-            return False
-            
-        missing_cols = [col for col in required_columns if col not in self.data.columns]
-        if missing_cols:
-            logging.error(f"Colonnes requises manquantes : {missing_cols}")
-            return False
-            
-        # Vérification des valeurs aberrantes
-        if 'temperature_c' in self.data.columns:
-            if (self.data['temperature_c'] < -50).any() or (self.data['temperature_c'] > 60).any():
-                logging.warning("Valeurs de température suspectes détectées")
-                
-        return True
-
-    def load_data(self, source_format: str = 'auto') -> bool:
-        """
-        Charge les données depuis le dossier processed
-        Formats supportés : 'parquet', 'csv', 'auto'
-        """
-        try:
-            # Détection automatique du format
-            if source_format == 'auto':
-                parquet_path = self.processed_dir / 'donnees_meteo_consolidees.parquet'
-                csv_path = self.processed_dir / 'donnees_meteo_consolidees.csv'
-                
-                if parquet_path.exists():
-                    source_format = 'parquet'
-                elif csv_path.exists():
-                    source_format = 'csv'
-                else:
-                    logging.error("Aucun fichier de données trouvé dans data/processed")
-                    return False
-
-            # Chargement selon le format
-            filepath = self.processed_dir / f"donnees_meteo_consolidees.{'parquet' if source_format == 'parquet' else 'csv'}"
-            
-            if source_format == 'parquet':
-                self.data = pd.read_parquet(filepath)
-            else:  # CSV
-                self.data = pd.read_csv(filepath, parse_dates=['datetime'])
-
-            # Validation et post-traitement
-            if self._validate_data():
-                self._enhance_data()
-                self.loaded = True
-                logging.info(f"Données chargées avec succès. {len(self.data)} enregistrements.")
-                return True
-            return False
-
-        except Exception as e:
-            logging.error(f"Erreur de chargement : {str(e)}", exc_info=True)
-            return False
-
-    def _enhance_data(self):
-        """Enrichit les données avec des métriques supplémentaires"""
-        try:
-            # Extraction des composantes temporelles
-            self.data['annee'] = self.data['datetime'].dt.year
-            self.data['mois'] = self.data['datetime'].dt.month
-            self.data['jour'] = self.data['datetime'].dt.day
-            self.data['heure'] = self.data['datetime'].dt.hour
-            
-            # Calcul de l'indice de chaleur
-            if all(col in self.data.columns for col in ['temperature_c', 'vent_vitesse_kmh']):
-                self.data['indice_chaleur'] = self.data.apply(
-                    lambda x: 13.12 + 0.6215*x['temperature_c'] - 11.37*(x['vent_vitesse_kmh']**0.16) + 
-                    0.3965*x['temperature_c']*(x['vent_vitesse_kmh']**0.16),
-                    axis=1
-                )
-        except Exception as e:
-            logging.warning(f"Erreur lors de l'enrichissement des données : {str(e)}")
-
-    def get_city_data(self, city_name: str, save_csv: bool = False) -> Optional[pd.DataFrame]:
-        """Récupère les données pour une ville spécifique"""
-        if not self.loaded:
-            logging.warning("Données non chargées")
-            return None
-        
-        try:
-            city_data = self.data[self.data['ville'] == city_name].copy()
-            if city_data.empty:
-                logging.warning(f"Aucune donnée pour {city_name}")
-                return None
-                
-            if save_csv:
-                city_dir = self.output_dir / 'villes'
-                city_dir.mkdir(exist_ok=True)
-                output_path = city_dir / f"{city_name.lower()}_data.csv"
-                city_data.to_csv(output_path, index=False)
-                logging.info(f"Données pour {city_name} sauvegardées dans {output_path}")
-            
-            return city_data
-        except Exception as e:
-            logging.error(f"Erreur lors de la récupération des données pour {city_name}: {str(e)}")
-            return None
-
-    def get_time_period_data(self, start_date: str, end_date: str, save_csv: bool = False) -> Optional[pd.DataFrame]:
-        """Filtre les données par période temporelle avec validation"""
-        try:
-            start_dt = pd.to_datetime(start_date)
-            end_dt = pd.to_datetime(end_date)
-            
-            if start_dt > end_dt:
-                logging.error("La date de début doit être antérieure à la date de fin")
-                return None
-                
-            mask = (self.data['datetime'] >= start_dt) & (self.data['datetime'] <= end_dt)
-            period_data = self.data.loc[mask].copy()
-            
-            if period_data.empty:
-                logging.warning(f"Aucune donnée disponible entre {start_date} et {end_date}")
-                return None
-                
-            if save_csv:
-                period_dir = self.output_dir / 'periodes'
-                period_dir.mkdir(exist_ok=True)
-                filename = f"donnees_{start_dt:%Y%m%d}_to_{end_dt:%Y%m%d}.csv"
-                output_path = period_dir / filename
-                period_data.to_csv(output_path, index=False)
-                logging.info(f"Données sauvegardées dans {output_path}")
-            
-            return period_data
-            
-        except ValueError as e:
-            logging.error(f"Format de date invalide : {str(e)}")
-            return None
-        except Exception as e:
-            logging.error(f"Erreur de filtrage temporel : {str(e)}", exc_info=True)
-            return None
-
-    def generate_analysis_report(self, output_file: str = 'rapport_meteo.png') -> bool:
-        """Génère un rapport d'analyse complet avec gestion de style robuste"""
-        if not self.loaded:
-            logging.error("Données non chargées")
+    def init_db(self) -> bool:
+        """Initialise la structure de la base de données"""
+        if not self.conn:
             return False
             
         try:
-            # Configuration du style avec fallback
-            available_styles = plt.style.available
-            preferred_styles = ['seaborn-v0_8', 'seaborn', 'ggplot', 'default']
+            cursor = self.conn.cursor()
             
-            for style in preferred_styles:
-                if style in available_styles:
-                    plt.style.use(style)
-                    sns.set_palette("husl")
-                    break
-            else:
-                logging.warning("Aucun style préféré disponible, utilisation du style par défaut")
-                sns.reset_defaults()
+            # Table pour les données nettoyées
+            cursor.execute(f"""
+            CREATE TABLE IF NOT EXISTS {TABLE_NAMES['clean_data']} (
+                ville TEXT,
+                pays TEXT,
+                date DATE,
+                temperature REAL,
+                humidite REAL,
+                pression REAL,
+                vent_vitesse REAL,
+                mois INTEGER,
+                annee INTEGER,
+                PRIMARY KEY (ville, date)
+            )""")
             
-            # Création des graphiques
-            fig, axes = plt.subplots(3, 1, figsize=(15, 18))
+            # Table pour les scores mensuels
+            cursor.execute(f"""
+            CREATE TABLE IF NOT EXISTS {TABLE_NAMES['scores']} (
+                ville TEXT,
+                mois INTEGER,
+                temp_moyenne REAL,
+                humidite_moyenne REAL,
+                vent_moyen REAL,
+                score_moyen REAL,
+                nb_jours INTEGER,
+                PRIMARY KEY (ville, mois))
+            """)
             
-            # Graphique 1: Distribution des températures
-            sns.boxplot(data=self.data, x='ville', y='temperature_c', ax=axes[0])
-            axes[0].set_title('Distribution des Températures par Ville', pad=20)
-            axes[0].set_xlabel('')
-            axes[0].set_ylabel('Température (°C)')
-            
-            # Graphique 2: Tendances temporelles
-            sample_data = self.data.sample(min(1000, len(self.data)))
-            sns.lineplot(
-                data=sample_data, 
-                x='datetime', 
-                y='temperature_c', 
-                hue='ville',
-                estimator='mean', 
-                errorbar=None,
-                ax=axes[1]
-            )
-            axes[1].set_title('Évolution des Températures Moyennes', pad=20)
-            axes[1].set_xlabel('Date')
-            axes[1].set_ylabel('Température (°C)')
-            axes[1].legend(title='Ville')
-            
-            # Graphique 3: Corrélations
-            numeric_cols = ['temperature_c', 'humidite_pourcent', 'vent_vitesse_kmh', 'pression_hpa']
-            numeric_cols = [col for col in numeric_cols if col in self.data.columns]
-            
-            if len(numeric_cols) >= 2:  # Nécessite au moins 2 colonnes pour une corrélation
-                sns.heatmap(
-                    self.data[numeric_cols].corr(), 
-                    annot=True, 
-                    cmap='coolwarm', 
-                    center=0,
-                    ax=axes[2]
-                )
-                axes[2].set_title('Matrice de Corrélation', pad=20)
-            else:
-                axes[2].axis('off')
-                axes[2].text(0.5, 0.5, 'Pas assez de données numériques\npour la matrice de corrélation',
-                            ha='center', va='center')
-            
-            # Sauvegarde du rapport
-            plt.tight_layout()
-            output_path = self.output_dir / output_file
-            plt.savefig(output_path, dpi=300, bbox_inches='tight')
-            plt.close()
-            
-            logging.info(f"Rapport d'analyse généré avec succès : {output_path}")
+            self.conn.commit()
+            logger.info("Structure de la base initialisée")
             return True
             
-        except Exception as e:
-            logging.error(f"Erreur lors de la génération du rapport : {str(e)}", exc_info=True)
+        except sqlite3.Error as e:
+            logger.error(f"Erreur d'initialisation: {str(e)}")
             return False
+    
+    def load_from_files(self, date_str: str = None) -> bool:
+        """
+        Charge les données depuis les fichiers transformés
+        Si date_str est None, utilise la date actuelle
+        """
+        if date_str is None:
+            date_str = datetime.now().strftime("%Y%m%d")
+        
+        try:
+            # Charger les données transformées
+            clean_path = os.path.join(PROCESSED_DIR, "weather_cleaned.csv")
+            scores_path = os.path.join(PROCESSED_DIR, "weather_scores.csv")
+            
+            df_clean = pd.read_csv(clean_path)
+            df_scores = pd.read_csv(scores_path)
+            
+            return self._load_dataframes(df_clean, df_scores)
+            
+        except FileNotFoundError as e:
+            logger.error(f"Fichier non trouvé: {str(e)}")
+            return False
+        except pd.errors.EmptyDataError:
+            logger.error("Fichier de données vide")
+            return False
+    
+    def load_from_transformer(self) -> bool:
+        """
+        Charge les données directement depuis le transformateur
+        (en mémoire sans passer par les fichiers)
+        """
+        _, monthly_scores = self.transformer.transform()
+        return self._load_dataframes(None, monthly_scores)
+    
+    def _load_dataframes(self, 
+                       df_clean: Optional[pd.DataFrame], 
+                       df_scores: pd.DataFrame) -> bool:
+        """
+        Méthode interne pour charger des DataFrames dans la base
+        """
+        if not self.connect_db():
+            return False
+            
+        try:
+            cursor = self.conn.cursor()
+            
+            # Chargement des données nettoyées
+            if df_clean is not None:
+                df_clean.to_sql(
+                    TABLE_NAMES['clean_data'],
+                    self.conn,
+                    if_exists='append',
+                    index=False,
+                    method='multi',
+                    chunksize=1000
+                )
+                logger.info(f"{len(df_clean)} enregistrements chargés dans {TABLE_NAMES['clean_data']}")
+            
+            # Chargement des scores mensuels (toujours mis à jour)
+            cursor.execute(f"DELETE FROM {TABLE_NAMES['scores']}")
+            
+            df_scores.to_sql(
+                TABLE_NAMES['scores'],
+                self.conn,
+                if_exists='append',
+                index=False
+            )
+            logger.info(f"{len(df_scores)} scores mensuels chargés dans {TABLE_NAMES['scores']}")
+            
+            self.conn.commit()
+            return True
+            
+        except sqlite3.Error as e:
+            logger.error(f"Erreur de chargement: {str(e)}")
+            self.conn.rollback()
+            return False
+        finally:
+            if self.conn:
+                self.conn.close()
+                self.conn = None
+    
+    def get_best_months(self, city: str, limit: int = 3) -> Optional[pd.DataFrame]:
+        """
+        Récupère les meilleurs mois pour visiter une ville
+        selon le score météo moyen
+        """
+        if not self.connect_db():
+            return None
+            
+        try:
+            query = f"""
+            SELECT ville, mois, score_moyen 
+            FROM {TABLE_NAMES['scores']}
+            WHERE ville = ?
+            ORDER BY score_moyen DESC
+            LIMIT ?
+            """
+            
+            df = pd.read_sql(query, self.conn, params=(city, limit))
+            return df
+            
+        except sqlite3.Error as e:
+            logger.error(f"Erreur de requête: {str(e)}")
+            return None
+        finally:
+            if self.conn:
+                self.conn.close()
+                self.conn = None
+
+def main():
+    """Point d'entrée principal"""
+    loader = WeatherLoader()
+    
+    # 1. Initialisation de la base
+    if not loader.connect_db() or not loader.init_db():
+        return
+    
+    # 2. Chargement des données (depuis les fichiers)
+    success = loader.load_from_files()
+    
+    # Alternative: Chargement direct depuis le transformateur
+    # success = loader.load_from_transformer()
+    
+    if success:
+        # 3. Exemple de requête
+        print("\nMeilleurs mois pour visiter Paris:")
+        paris_months = loader.get_best_months("Paris")
+        if paris_months is not None:
+            print(paris_months.to_string(index=False))
+    
+    logger.info("Chargement terminé")
 
 if __name__ == "__main__":
-    try:
-        loader = WeatherDataLoader()
-        
-        if loader.load_data(source_format='auto'):
-            # Exemple d'utilisation
-            paris_data = loader.get_city_data('Paris', save_csv=True)
-            if paris_data is not None:
-                print("\nStatistiques pour Paris:")
-                print(paris_data[['datetime', 'temperature_c', 'conditions']].tail(3))
-            
-            # Génération du rapport complet
-            loader.generate_analysis_report()
-            
-            # Export des données récentes
-            loader.get_time_period_data(
-                start_date="2023-06-01",
-                end_date="2023-06-30",
-                save_csv=True
-            )
-    except Exception as e:
-        logging.critical(f"Erreur critique dans le main : {str(e)}", exc_info=True)
+    main()
