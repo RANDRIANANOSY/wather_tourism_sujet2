@@ -1,0 +1,5 @@
+ville,temperature_c,temperature_ressentie_c,humidite_pourcent,pression_hpa,vent_vitesse_kmh,conditions,visibilite_km,couverture_nuageuse_pourcent,datetime,annee,mois,jour,heure_num,indice_confort,heure,indice_chaleur
+Paris,19.12,18.94,71,1027,18.5,Nuageux,10.0,75,2025-07-03 10:22:00,2025,7,3,10,Inconfortable,10,18.959936429804614
+Paris,19.21,19.04,71,1027,18.5,Nuageux,10.0,75,2025-07-03 10:31:00,2025,7,3,10,Inconfortable,10,19.072787273449357
+Paris,20.13,19.92,66,1027,16.67,Ciel dégagé,10.0,0,2025-07-03 10:51:00,2025,7,3,10,Confortable,10,20.315695263187628
+Paris,20.61,20.29,60,1027,16.67,Partiellement nuageux,10.0,40,2025-07-03 11:38:00,2025,7,3,11,Confortable,11,20.91254948657561
