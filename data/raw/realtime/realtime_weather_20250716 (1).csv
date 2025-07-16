@@ -1,0 +1,6 @@
+ville,pays,date,heure,temperature,humidite,pression,vent_vitesse,description,lat,lon
+Paris,FR,2025-07-16,17:26:07,21.68,79,1018,6.17,couvert,48.8534,2.3488
+Londres,GB,2025-07-16,17:26:07,23.64,47,1016,3.09,couvert,51.5085,-0.1257
+Préfecture de Tokyo,JP,2025-07-16,17:26:07,25.91,80,1017,7.72,légère pluie,35.6895,139.6917
+New York,US,2025-07-16,17:26:07,31.57,64,1016,5.66,partiellement nuageux,40.7143,-74.006
+Berlin,DE,2025-07-16,17:26:08,19.19,77,1009,1.54,ciel dégagé,52.5244,13.4105

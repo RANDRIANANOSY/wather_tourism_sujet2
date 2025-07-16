@@ -1,0 +1,151 @@
+ville,pays,date,heure,temperature,humidite,pression,vent_vitesse,description
+Paris,FR,2025-07-15,12:00:00,23,86,1017,0,Partiellement nuageux
+Paris,FR,2025-07-14,12:00:00,20,80,1009,1,Partiellement nuageux
+Paris,FR,2025-07-13,12:00:00,26,65,1008,13,Partiellement nuageux
+Paris,FR,2025-07-12,12:00:00,28,89,1007,11,Partiellement nuageux
+Paris,FR,2025-07-11,12:00:00,22,82,1022,5,Partiellement nuageux
+Paris,FR,2025-07-10,12:00:00,28,67,1021,9,Partiellement nuageux
+Paris,FR,2025-07-09,12:00:00,22,72,1003,11,Partiellement nuageux
+Paris,FR,2025-07-08,12:00:00,20,50,1018,2,Partiellement nuageux
+Paris,FR,2025-07-07,12:00:00,26,59,1014,8,Partiellement nuageux
+Paris,FR,2025-07-06,12:00:00,27,74,1009,5,Partiellement nuageux
+Paris,FR,2025-07-05,12:00:00,27,83,1014,13,Partiellement nuageux
+Paris,FR,2025-07-04,12:00:00,22,53,1010,3,Partiellement nuageux
+Paris,FR,2025-07-03,12:00:00,23,79,1015,10,Partiellement nuageux
+Paris,FR,2025-07-02,12:00:00,22,65,1003,12,Partiellement nuageux
+Paris,FR,2025-07-01,12:00:00,24,56,1022,14,Partiellement nuageux
+Paris,FR,2025-06-30,12:00:00,22,81,1011,14,Partiellement nuageux
+Paris,FR,2025-06-29,12:00:00,21,67,1008,5,Partiellement nuageux
+Paris,FR,2025-06-28,12:00:00,25,70,1008,9,Partiellement nuageux
+Paris,FR,2025-06-27,12:00:00,18,59,1003,11,Partiellement nuageux
+Paris,FR,2025-06-26,12:00:00,16,79,1004,12,Partiellement nuageux
+Paris,FR,2025-06-25,12:00:00,20,70,1012,12,Partiellement nuageux
+Paris,FR,2025-06-24,12:00:00,18,57,1019,4,Partiellement nuageux
+Paris,FR,2025-06-23,12:00:00,20,71,1019,14,Partiellement nuageux
+Paris,FR,2025-06-22,12:00:00,19,51,1004,7,Partiellement nuageux
+Paris,FR,2025-06-21,12:00:00,21,71,1009,13,Partiellement nuageux
+Paris,FR,2025-06-20,12:00:00,16,52,1008,7,Partiellement nuageux
+Paris,FR,2025-06-19,12:00:00,23,64,1005,7,Partiellement nuageux
+Paris,FR,2025-06-18,12:00:00,20,86,1010,4,Partiellement nuageux
+Paris,FR,2025-06-17,12:00:00,17,75,1022,13,Partiellement nuageux
+Paris,FR,2025-06-16,12:00:00,25,89,1016,12,Partiellement nuageux
+London,GB,2025-07-15,12:00:00,21,84,1010,0,Partiellement nuageux
+London,GB,2025-07-14,12:00:00,20,54,1017,14,Partiellement nuageux
+London,GB,2025-07-13,12:00:00,16,77,1014,1,Partiellement nuageux
+London,GB,2025-07-12,12:00:00,20,74,1021,2,Partiellement nuageux
+London,GB,2025-07-11,12:00:00,15,53,1018,7,Partiellement nuageux
+London,GB,2025-07-10,12:00:00,20,88,1021,0,Partiellement nuageux
+London,GB,2025-07-09,12:00:00,22,69,1022,8,Partiellement nuageux
+London,GB,2025-07-08,12:00:00,19,76,1016,2,Partiellement nuageux
+London,GB,2025-07-07,12:00:00,24,66,1013,2,Partiellement nuageux
+London,GB,2025-07-06,12:00:00,16,86,1009,12,Partiellement nuageux
+London,GB,2025-07-05,12:00:00,20,76,1022,1,Partiellement nuageux
+London,GB,2025-07-04,12:00:00,21,76,1009,5,Partiellement nuageux
+London,GB,2025-07-03,12:00:00,19,58,1015,3,Partiellement nuageux
+London,GB,2025-07-02,12:00:00,24,63,1004,13,Partiellement nuageux
+London,GB,2025-07-01,12:00:00,16,75,1015,11,Partiellement nuageux
+London,GB,2025-06-30,12:00:00,13,75,1016,3,Partiellement nuageux
+London,GB,2025-06-29,12:00:00,15,67,1020,9,Partiellement nuageux
+London,GB,2025-06-28,12:00:00,22,83,1006,1,Partiellement nuageux
+London,GB,2025-06-27,12:00:00,20,86,1012,5,Partiellement nuageux
+London,GB,2025-06-26,12:00:00,20,69,1021,9,Partiellement nuageux
+London,GB,2025-06-25,12:00:00,21,67,1010,10,Partiellement nuageux
+London,GB,2025-06-24,12:00:00,14,74,1005,9,Partiellement nuageux
+London,GB,2025-06-23,12:00:00,19,80,1009,8,Partiellement nuageux
+London,GB,2025-06-22,12:00:00,19,75,1011,10,Partiellement nuageux
+London,GB,2025-06-21,12:00:00,22,83,1005,11,Partiellement nuageux
+London,GB,2025-06-20,12:00:00,14,57,1009,5,Partiellement nuageux
+London,GB,2025-06-19,12:00:00,16,55,1017,4,Partiellement nuageux
+London,GB,2025-06-18,12:00:00,22,73,1014,11,Partiellement nuageux
+London,GB,2025-06-17,12:00:00,20,68,1016,5,Partiellement nuageux
+London,GB,2025-06-16,12:00:00,21,86,1020,9,Partiellement nuageux
+Tokyo,JP,2025-07-15,12:00:00,25,62,1009,8,Partiellement nuageux
+Tokyo,JP,2025-07-14,12:00:00,32,61,1009,13,Partiellement nuageux
+Tokyo,JP,2025-07-13,12:00:00,25,50,1017,12,Partiellement nuageux
+Tokyo,JP,2025-07-12,12:00:00,23,50,1007,3,Partiellement nuageux
+Tokyo,JP,2025-07-11,12:00:00,32,55,1018,10,Partiellement nuageux
+Tokyo,JP,2025-07-10,12:00:00,28,77,1019,3,Partiellement nuageux
+Tokyo,JP,2025-07-09,12:00:00,28,55,1009,7,Partiellement nuageux
+Tokyo,JP,2025-07-08,12:00:00,24,62,1014,7,Partiellement nuageux
+Tokyo,JP,2025-07-07,12:00:00,28,73,1020,8,Partiellement nuageux
+Tokyo,JP,2025-07-06,12:00:00,25,76,1018,12,Partiellement nuageux
+Tokyo,JP,2025-07-05,12:00:00,32,78,1015,11,Partiellement nuageux
+Tokyo,JP,2025-07-04,12:00:00,25,88,1009,12,Partiellement nuageux
+Tokyo,JP,2025-07-03,12:00:00,24,85,1011,14,Partiellement nuageux
+Tokyo,JP,2025-07-02,12:00:00,29,72,1006,7,Partiellement nuageux
+Tokyo,JP,2025-07-01,12:00:00,28,55,1019,2,Partiellement nuageux
+Tokyo,JP,2025-06-30,12:00:00,22,65,1017,10,Partiellement nuageux
+Tokyo,JP,2025-06-29,12:00:00,23,62,1005,3,Partiellement nuageux
+Tokyo,JP,2025-06-28,12:00:00,22,82,1005,10,Partiellement nuageux
+Tokyo,JP,2025-06-27,12:00:00,26,58,1022,10,Partiellement nuageux
+Tokyo,JP,2025-06-26,12:00:00,27,70,1015,5,Partiellement nuageux
+Tokyo,JP,2025-06-25,12:00:00,20,84,1004,13,Partiellement nuageux
+Tokyo,JP,2025-06-24,12:00:00,22,75,1015,6,Partiellement nuageux
+Tokyo,JP,2025-06-23,12:00:00,24,79,1003,14,Partiellement nuageux
+Tokyo,JP,2025-06-22,12:00:00,24,88,1012,7,Partiellement nuageux
+Tokyo,JP,2025-06-21,12:00:00,19,60,1008,3,Partiellement nuageux
+Tokyo,JP,2025-06-20,12:00:00,24,89,1010,4,Partiellement nuageux
+Tokyo,JP,2025-06-19,12:00:00,23,58,1005,6,Partiellement nuageux
+Tokyo,JP,2025-06-18,12:00:00,20,59,1018,8,Partiellement nuageux
+Tokyo,JP,2025-06-17,12:00:00,22,82,1009,6,Partiellement nuageux
+Tokyo,JP,2025-06-16,12:00:00,26,71,1016,4,Partiellement nuageux
+New York,US,2025-07-15,12:00:00,24,88,1015,0,Partiellement nuageux
+New York,US,2025-07-14,12:00:00,26,81,1020,8,Partiellement nuageux
+New York,US,2025-07-13,12:00:00,24,64,1020,9,Partiellement nuageux
+New York,US,2025-07-12,12:00:00,28,60,1018,6,Partiellement nuageux
+New York,US,2025-07-11,12:00:00,29,83,1004,8,Partiellement nuageux
+New York,US,2025-07-10,12:00:00,32,59,1011,11,Partiellement nuageux
+New York,US,2025-07-09,12:00:00,23,87,1019,14,Partiellement nuageux
+New York,US,2025-07-08,12:00:00,28,83,1005,7,Partiellement nuageux
+New York,US,2025-07-07,12:00:00,29,86,1010,8,Partiellement nuageux
+New York,US,2025-07-06,12:00:00,26,79,1013,9,Partiellement nuageux
+New York,US,2025-07-05,12:00:00,31,84,1005,13,Partiellement nuageux
+New York,US,2025-07-04,12:00:00,24,66,1017,4,Partiellement nuageux
+New York,US,2025-07-03,12:00:00,24,86,1005,7,Partiellement nuageux
+New York,US,2025-07-02,12:00:00,31,89,1014,6,Partiellement nuageux
+New York,US,2025-07-01,12:00:00,23,63,1005,4,Partiellement nuageux
+New York,US,2025-06-30,12:00:00,27,53,1003,2,Partiellement nuageux
+New York,US,2025-06-29,12:00:00,25,50,1014,13,Partiellement nuageux
+New York,US,2025-06-28,12:00:00,25,61,1019,12,Partiellement nuageux
+New York,US,2025-06-27,12:00:00,26,72,1017,13,Partiellement nuageux
+New York,US,2025-06-26,12:00:00,24,69,1017,4,Partiellement nuageux
+New York,US,2025-06-25,12:00:00,27,71,1006,0,Partiellement nuageux
+New York,US,2025-06-24,12:00:00,29,83,1020,2,Partiellement nuageux
+New York,US,2025-06-23,12:00:00,28,80,1017,7,Partiellement nuageux
+New York,US,2025-06-22,12:00:00,26,56,1007,11,Partiellement nuageux
+New York,US,2025-06-21,12:00:00,28,69,1015,3,Partiellement nuageux
+New York,US,2025-06-20,12:00:00,22,77,1017,12,Partiellement nuageux
+New York,US,2025-06-19,12:00:00,25,66,1017,12,Partiellement nuageux
+New York,US,2025-06-18,12:00:00,29,53,1010,5,Partiellement nuageux
+New York,US,2025-06-17,12:00:00,25,82,1013,8,Partiellement nuageux
+New York,US,2025-06-16,12:00:00,20,75,1019,12,Partiellement nuageux
+Berlin,DE,2025-07-15,12:00:00,18,57,1019,10,Partiellement nuageux
+Berlin,DE,2025-07-14,12:00:00,24,89,1006,10,Partiellement nuageux
+Berlin,DE,2025-07-13,12:00:00,21,88,1010,11,Partiellement nuageux
+Berlin,DE,2025-07-12,12:00:00,19,72,1010,10,Partiellement nuageux
+Berlin,DE,2025-07-11,12:00:00,21,69,1021,8,Partiellement nuageux
+Berlin,DE,2025-07-10,12:00:00,25,71,1014,5,Partiellement nuageux
+Berlin,DE,2025-07-09,12:00:00,18,58,1005,10,Partiellement nuageux
+Berlin,DE,2025-07-08,12:00:00,26,66,1011,5,Partiellement nuageux
+Berlin,DE,2025-07-07,12:00:00,25,67,1018,10,Partiellement nuageux
+Berlin,DE,2025-07-06,12:00:00,21,86,1012,5,Partiellement nuageux
+Berlin,DE,2025-07-05,12:00:00,17,62,1004,14,Partiellement nuageux
+Berlin,DE,2025-07-04,12:00:00,18,64,1009,10,Partiellement nuageux
+Berlin,DE,2025-07-03,12:00:00,20,59,1006,1,Partiellement nuageux
+Berlin,DE,2025-07-02,12:00:00,20,89,1014,0,Partiellement nuageux
+Berlin,DE,2025-07-01,12:00:00,21,85,1006,6,Partiellement nuageux
+Berlin,DE,2025-06-30,12:00:00,18,68,1005,9,Partiellement nuageux
+Berlin,DE,2025-06-29,12:00:00,23,75,1018,7,Partiellement nuageux
+Berlin,DE,2025-06-28,12:00:00,15,61,1003,8,Partiellement nuageux
+Berlin,DE,2025-06-27,12:00:00,15,50,1012,12,Partiellement nuageux
+Berlin,DE,2025-06-26,12:00:00,23,76,1003,3,Partiellement nuageux
+Berlin,DE,2025-06-25,12:00:00,16,83,1018,8,Partiellement nuageux
+Berlin,DE,2025-06-24,12:00:00,20,81,1005,12,Partiellement nuageux
+Berlin,DE,2025-06-23,12:00:00,24,58,1019,3,Partiellement nuageux
+Berlin,DE,2025-06-22,12:00:00,23,83,1019,5,Partiellement nuageux
+Berlin,DE,2025-06-21,12:00:00,24,78,1013,8,Partiellement nuageux
+Berlin,DE,2025-06-20,12:00:00,18,54,1014,14,Partiellement nuageux
+Berlin,DE,2025-06-19,12:00:00,16,62,1018,14,Partiellement nuageux
+Berlin,DE,2025-06-18,12:00:00,17,83,1015,5,Partiellement nuageux
+Berlin,DE,2025-06-17,12:00:00,18,73,1005,7,Partiellement nuageux
+Berlin,DE,2025-06-16,12:00:00,23,84,1004,3,Partiellement nuageux
