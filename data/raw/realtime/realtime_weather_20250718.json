@@ -1,0 +1,57 @@
+[
+  {
+    "ville": "Paris",
+    "pays": "FR",
+    "date": "2025-07-18",
+    "heure": "08:02:19",
+    "temperature": 19.19,
+    "humidite": 87,
+    "pression": 1014,
+    "vent_vitesse": 1.54,
+    "description": "ciel dégagé"
+  },
+  {
+    "ville": "Londres",
+    "pays": "GB",
+    "date": "2025-07-18",
+    "heure": "08:02:20",
+    "temperature": 18.55,
+    "humidite": 88,
+    "pression": 1014,
+    "vent_vitesse": 3.09,
+    "description": "couvert"
+  },
+  {
+    "ville": "Préfecture de Tokyo",
+    "pays": "JP",
+    "date": "2025-07-18",
+    "heure": "08:02:20",
+    "temperature": 31.59,
+    "humidite": 60,
+    "pression": 1016,
+    "vent_vitesse": 8.23,
+    "description": "nuageux"
+  },
+  {
+    "ville": "New York",
+    "pays": "US",
+    "date": "2025-07-18",
+    "heure": "08:02:20",
+    "temperature": 28.33,
+    "humidite": 55,
+    "pression": 1012,
+    "vent_vitesse": 8.94,
+    "description": "nuageux"
+  },
+  {
+    "ville": "Berlin",
+    "pays": "DE",
+    "date": "2025-07-18",
+    "heure": "08:02:21",
+    "temperature": 16.82,
+    "humidite": 96,
+    "pression": 1013,
+    "vent_vitesse": 2.68,
+    "description": "couvert"
+  }
+]
